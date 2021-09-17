@@ -12,7 +12,7 @@ public class UserDAO {
 
 	String dbUr1 = "jdbc:mysql://localhost/vote?useSSL=false";
 	String username = "root";
-	String password = "1234";
+	String password = "1216";
 
 	Connection con = null;
 	ResultSet rs = null;
@@ -20,11 +20,10 @@ public class UserDAO {
 
 	public int select(String name, String pin) {
 		try {
-
 			String sql_select = "select * from user";
 			Class.forName(jdbcDriver);
 			con = DriverManager.getConnection(dbUr1, username, password);
-			System.out.println("DB ì ‘ì† ì™„ë£Œ");
+			System.out.println("DB Á¢¼Ó ¿Ï·á");
 			pstmt = con.prepareStatement(sql_select);
 			
 			rs = pstmt.executeQuery();
@@ -32,25 +31,17 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				String s_pin = rs.getString("pin");
-				System.out.println("Ppp"+pin);
-				System.out.println("SSSSSSSS"+s_pin);
+				
 				if (pin.equals(s_pin)) {
-					System.out.println("ì¸ì¦ ì„±ê³µ");
+					System.out.println("ÀÎÁõ ¼º°ø");
 					String s_cand = rs.getString("cand");
-					// ì¸ì¦ì´ ì„±ê³µë˜ì—ˆìœ¼ë©´ -> cand í™•ì¸
-					// íˆ¬í‘œë¡œ ë³´ë‚´ì£¼ê¸°
+					// ÀÎÁõÀÌ ¼º°øµÇ¾úÀ¸¸é -> cand È®ÀÎ
+					// ÅõÇ¥·Î º¸³»ÁÖ±â
 					if ( null == s_cand) {
-						System.out.println("íˆ¬í‘œ ì•„ì§ ì•ˆí•˜ì…¨ìŠµë‹ˆë‹¤");
 						return 1;
 					} else {
-						System.out.println("ì´ë¯¸ íˆ¬í‘œí•˜ì…¨ìŠµë‹ˆë‹¤");
 						return 2;
 					}
-
-				} else {
-					//ì¸ì¦ ì‹¤íŒ¨
-					System.out.println("qqqqq");
-					
 				}
 			}
 		} catch (Exception e) {
@@ -59,20 +50,20 @@ public class UserDAO {
 			try {
 				if (pstmt != null & !pstmt.isClosed()) {
 					pstmt.close();
-
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("ì¸ì¦ ì‹¤íŒ¨");
+		System.out.println("ÀÎÁõ ½ÇÆĞ");
 		return 3;
 	}
-
-	public String[] Select() {
+	
+	//ÅõÇ¥°á°ú
+	public String[] select() {
 		try {
-			String sql1 = String.format("select count(*) from user group by cand order by cand desc");
-			String [] count = new String [5];
+			String sql1 = String.format("select count(*) from user group by cand");
+			String [] count = new String [] {"0","0","0","0","0"};
 			int i = 0;
 			Class.forName(jdbcDriver);// .newInstance();
 			con = DriverManager.getConnection(dbUr1, username, password);
@@ -83,7 +74,12 @@ public class UserDAO {
 				count[i++] = rs.getString("count(*)");
 				System.out.println("count" + count[0]);
 			}		
-   }
+			return count;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
     
 	public void update(String name, String pin, String cand) {
 		try {
@@ -93,13 +89,11 @@ public class UserDAO {
 			con = DriverManager.getConnection(dbUr1, username, password);
 			pstmt = con.prepareStatement(sql1);
 			pstmt.executeUpdate();
-			System.out.println(sql1);
+			//System.out.println(sql1);
 			con.close();
-			return count;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 		
 	}
 }
