@@ -6,8 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController{
+	@RequestMapping("/c1")
+	public String methodc1(Model model, UserDAO dao) {
+		
+		model.addAttribute("count",dao.Select());
+		return "VoteResult";
+	}
+  
 	@RequestMapping("/a1")
-	public String method12(UserData data, UserDAO dao) {
+	public String methoda1(UserData data, UserDAO dao) {
 		dao.update(data.getName(), data.getPin(), data.getCand());
 		System.out.println(data.getName());
 		System.out.println(data.getPin());

@@ -25,8 +25,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/Views/" />
 	</mvc:view-resolvers>
-	
-	<mvc:view-controller path="/vote" view-name="Vote"/>
-	<mvc:view-controller path="/overlapuser" view-name="OverlapUser"/>
-	
+
+  <mvc:view-controller path="/vote" view-name="Vote"/>
+	<mvc:view-controller path="/VoteResult" view-name="VoteResult"/>
+
 </beans>
