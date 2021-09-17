@@ -23,5 +23,4 @@ public class UserData {
 	public void setCand(String cand) {
 		this.cand = cand;
 	}
-	
 }
