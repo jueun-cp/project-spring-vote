@@ -36,7 +36,7 @@
 <body>
 	<div class="div">
 		<button id="vote">
-		<a href="vote">투표하기</a>
+		<a href="UserAuth">투표하기</a>
 		</button>
 		<button id="voteResult">
 		<a href="c1">투표결과</a>

@@ -12,11 +12,10 @@ body{
 	flex-wrap : wrap;
 	flex-decoration : row;
 	padding-left : 500px;
-	padding-top : 250px;
 }
 
 .box{
-	border : 2px solid red;
+	border : 2px solid black;
 	margin : 30px;
 	padding : 20px;
 }

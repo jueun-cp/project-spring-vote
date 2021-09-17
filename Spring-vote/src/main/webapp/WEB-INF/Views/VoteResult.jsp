@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
- <%@ page import="Pack01.UserDAO"%>
- <%@page import="java.sql.SQLException"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="Pack01.UserDAO"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -9,44 +9,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+
+
 <title>Insert title here</title>
 <style>
-table{
-	border:1px solid black
+table {
+	border: 1px solid black
 }
-td, th{
-	border:1px solid black
+
+td, th {
+	border: 1px solid black
 }
-h1{
-text-align:center;
+
+h1 {
+	text-align: center;
 }
 </style>
 </head>
 <body>
-<%
+	<%
 	UserDAO us = new UserDAO();
-	us.Select();
-%>
+	us.select();
+	%>
 	<h1></h1>
-	<h1>ÅõÇ¥ °á°ú</h1>
+	<h1>íˆ¬í‘œ ê²°ê³¼</h1>
 	<table>
-	<tr>
-	<th>ÈÄº¸ÀÌ¸§</th>
-	<th>±â±Ç</th>
-	<th>È«±æµ¿</th>
-	<th>À¯°ü¼ø</th>
-	<th>ÀÌ¼ø½Å</th>
-	<th>ÅõÇ¥ ¾ÈÇÑ»ç¶÷</th>
-	</tr>
-	<tr>
-	<td>µæÇ¥¼ö</td>
-	<td>${count[0]}</td>
-	<td>${count[1]}</td>
-	<td>${count[2]}</td>
-	<td>${count[3]}</td>
-	<td>${count[4]}</td>
-	</tr>
+		<tr>
+			<th>í›„ë³´ì´ë¦„</th>
+			<th>íˆ¬í‘œ ì•ˆí•œì‚¬ëŒ</th>
+			<th>í™ê¸¸ë™</th>
+			<th>ì´ìˆœì‹ </th>
+			<th>ìœ ê´€ìˆœ</th>
+			<th>ê¸°ê¶Œ</th>
+		</tr>
+		<tr>
+			<td>ë“í‘œìˆ˜</td>
+			<td>${count[0]}</td>
+			<td>${count[1]}</td>
+			<td>${count[2]}</td>
+			<td>${count[3]}</td>
+			<td>${count[4]}</td>
+		</tr>
 	</table>
 </body>
 </html>
