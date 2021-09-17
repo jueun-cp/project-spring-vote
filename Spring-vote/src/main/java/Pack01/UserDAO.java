@@ -1,14 +1,18 @@
 package Pack01;
 
 import java.sql.*;
+import java.util.LinkedList;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 public class UserDAO {
 
 	String jdbcDriver = "com.mysql.jdbc.Driver";
-	// ¿©±â ¹Ù²ãÁà¾ßÇÔ
+
 	String dbUr1 = "jdbc:mysql://localhost/vote?useSSL=false";
 	String username = "root";
-	String password = "1216";
+	String password = "1234";
 
 	Connection con = null;
 	ResultSet rs = null;
@@ -20,7 +24,7 @@ public class UserDAO {
 			String sql_select = "select * from user";
 			Class.forName(jdbcDriver);
 			con = DriverManager.getConnection(dbUr1, username, password);
-			System.out.println("DB Á¢¼Ó ¿Ï·á");
+			System.out.println("DB ì ‘ì† ì™„ë£Œ");
 			pstmt = con.prepareStatement(sql_select);
 			
 			rs = pstmt.executeQuery();
@@ -31,20 +35,20 @@ public class UserDAO {
 				System.out.println("Ppp"+pin);
 				System.out.println("SSSSSSSS"+s_pin);
 				if (pin.equals(s_pin)) {
-					System.out.println("ÀÎÁõ ¼º°ø");
+					System.out.println("ì¸ì¦ ì„±ê³µ");
 					String s_cand = rs.getString("cand");
-					// ÀÎÁõÀÌ ¼º°øµÇ¾úÀ¸¸é -> cand È®ÀÎ
-					// ÅõÇ¥·Î º¸³»ÁÖ±â
+					// ì¸ì¦ì´ ì„±ê³µë˜ì—ˆìœ¼ë©´ -> cand í™•ì¸
+					// íˆ¬í‘œë¡œ ë³´ë‚´ì£¼ê¸°
 					if ( null == s_cand) {
-						System.out.println("ÅõÇ¥ ¾ÆÁ÷ ¾ÈÇÏ¼Ì½À´Ï´Ù");
+						System.out.println("íˆ¬í‘œ ì•„ì§ ì•ˆí•˜ì…¨ìŠµë‹ˆë‹¤");
 						return 1;
 					} else {
-						System.out.println("ÀÌ¹Ì ÅõÇ¥ÇÏ¼Ì½À´Ï´Ù");
+						System.out.println("ì´ë¯¸ íˆ¬í‘œí•˜ì…¨ìŠµë‹ˆë‹¤");
 						return 2;
 					}
 
 				} else {
-					//ÀÎÁõ ½ÇÆĞ
+					//ì¸ì¦ ì‹¤íŒ¨
 					System.out.println("qqqqq");
 					
 				}
@@ -61,19 +65,41 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("ÀÎÁõ ½ÇÆĞ");
+		System.out.println("ì¸ì¦ ì‹¤íŒ¨");
 		return 3;
 	}
 
-	public void insert(String usrID, String usrPIN) {
+	public String[] Select() {
 		try {
-			String sql1 = String.format("insert into user2 values('%s','%s')", usrID, usrPIN);
+			String sql1 = String.format("select count(*) from user group by cand order by cand desc");
+			String [] count = new String [5];
+			int i = 0;
+			Class.forName(jdbcDriver);// .newInstance();
+			con = DriverManager.getConnection(dbUr1, username, password);
+			pstmt = con.prepareStatement(sql1);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				System.out.println(rs.getString("count(*)"));
+				count[i++] = rs.getString("count(*)");
+				System.out.println("count" + count[0]);
+			}		
+   }
+    
+	public void update(String name, String pin, String cand) {
+		try {
+			System.out.println("1update");
+			String sql1 = String.format("update user set cand='%s' where name ='%s' and pin = '%s'", cand, name, pin);
 			Class.forName(jdbcDriver);// .newInstance();
 			con = DriverManager.getConnection(dbUr1, username, password);
 			pstmt = con.prepareStatement(sql1);
 			pstmt.executeUpdate();
+			System.out.println(sql1);
 			con.close();
+			return count;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
+		
 	}
 }
