@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1> 인증에 실패하였습니다.</h1>
+	<%= request.getParameter("name") %>
+	<%= request.getParameter("pin") %>
 </body>
 </html>
