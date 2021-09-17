@@ -9,5 +9,7 @@
 	<%=new Date()%>
 	<h2>Hello World</h2>
 	<a href="t1">링크1</a>
+	<a href="vote">vote</a>
+	<a href="overlapuser">overlap</a>
 	<br />
 </body>
